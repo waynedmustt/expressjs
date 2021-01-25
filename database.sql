@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `address` varchar(1) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `role` varchar(250) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
  
