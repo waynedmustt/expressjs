@@ -12,10 +12,10 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise.message);
+                res.status(500).json(promise);
                 return;
             }
-            res.status(200).json(promise.message);
+            res.status(200).json(promise);
         },
         getById: async (req, res) => {
             if (!req.params || !req.params.userId) {
@@ -106,10 +106,10 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise.message);
+                res.status(500).json(promise);
                 return;
             }
-            res.status(200).json(promise.message);
+            res.status(200).json(promise);
         },
     };
 
