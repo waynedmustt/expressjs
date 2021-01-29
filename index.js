@@ -9,10 +9,14 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// routes
-const users = require('./routes/user')
+const isAuthenticated = require('./core/middlewares/isAuthenticated') 
 
-app.use('/users', users);
+// routes
+const users = require('./routes/user'),
+      auth = require('./routes/auth')
+
+app.use('/users', isAuthenticated, users);
+app.use('/auth', auth);
 
 app.get('/', (req, res) => {
   res.send('Hello Glints!')
