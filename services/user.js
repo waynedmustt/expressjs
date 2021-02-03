@@ -1,15 +1,11 @@
 const db = require('../core/db'),
+    coreService = require('../core/service'),
     userService = {
         getAll: (req, res) => {
             let statement = 'SELECT * from users';
 
-            if (req.query && req.query.fields) {
-                statement = `SELECT ${req.query.fields} from users`;
-            }
+            statement = coreService.handleQuery(req.query, statement);
 
-            if (req.query && req.query.limit) {
-                statement = statement + ' LIMIT ' + req.query.limit;
-            }
             return new Promise(
                 (resolve, reject) => {   
                     db.query(statement, (err, res) => {
@@ -28,9 +24,7 @@ const db = require('../core/db'),
                 (resolve, reject) => { 
                     let statement = 'SELECT * from users where id = ?';
 
-                    if (req.query && req.query.fields) {
-                        statement = `SELECT ${req.query.fields} from users where id = ?`;
-                    }
+                    statement = coreService.handleQuery(req.query, statement);
                 
                     db.query(statement, [req.params.userId], (err, res) => {
                         if (err) {
