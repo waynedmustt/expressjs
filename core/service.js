@@ -14,10 +14,6 @@ module.exports = {
             result = result;
         }
 
-        if (query.limit) {
-            result = result + ' LIMIT ' + query.limit;
-        }
-
         if (query.orderBy) {
             result = result + ' ORDER BY ' + query.orderBy;
 
@@ -25,6 +21,10 @@ module.exports = {
             if (sort) {
                 result = result + ' ' + sort;
             }
+        }
+
+        if (query.limit) {
+            result = result + ' LIMIT ' + query.limit;
         }
         return result;
     }
