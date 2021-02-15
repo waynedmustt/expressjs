@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
   res.send('Hello Glints!')
 })
 
-app.listen(port, () => {
-  console.log(`Glints ExpressJS App at http://localhost:${port}`)
-})
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Glints ExpressJS App at http://localhost:${port}`)
+  })
+}
+
+module.exports = app

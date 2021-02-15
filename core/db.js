@@ -11,8 +11,10 @@ const connection = mysql.createConnection({
         database : process.env.DATABASE || 'database'
       });
 
-connection.connect((err) => {
-    if (err) throw err;
-});
+if (process.env.NODE_ENV !== 'test') {
+    connection.connect((err) => {
+        if (err) throw err;
+    });
+}
 
 module.exports = connection;
