@@ -35,15 +35,15 @@ describe('User', () => {
             })
     })
 
-    it('POST /users : should return 200 response code with body', (done) => {
-        request(app)
-            .post('/users')
-            .send({name: 'admin', role: 'admin'})
-            .then(response => {
-                expect(response.status).toBe(200);
-                done();
-            })
-    })
+    // it('POST /users : should return 200 response code with body', (done) => {
+    //     request(app)
+    //         .post('/users')
+    //         .send({name: 'admin', role: 'admin'})
+    //         .then(response => {
+    //             expect(response.status).toBe(200);
+    //             done();
+    //         })
+    // })
 
     it('PUT /users : should return 200 response code', (done) => {
         request(app)

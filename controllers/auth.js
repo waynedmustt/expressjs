@@ -3,11 +3,10 @@ const authService = require('../services/auth'),
     authController = {
         login: async (req, res) => {
             if (!req.body || !req.body.name) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: false,
                     message: 'fields are not available!'
                 });
-                return;
             }
 
             const promise = await authService.login(req, res)
@@ -30,16 +29,16 @@ const authService = require('../services/auth'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise);
-                return;
+                 return res.status(500).json(promise);
             }
-            res.status(200).json(promise);
+            
+            return res.status(200).json(promise);
         },
         logout: (req, res) => {
             req.app.set('authenticatedUser', null);
             req.app.set('isAuthenticated', false);
 
-            res.status(200).json({
+            return res.status(200).json({
                 status: true,
                 message: 'successfully logout!'
             });

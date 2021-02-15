@@ -12,18 +12,16 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise);
-                return;
+                return res.status(500).json(promise);
             }
-            res.status(200).json(promise);
+            return res.status(200).json(promise);
         },
         getById: async (req, res) => {
             if (!req.params || !req.params.userId) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: false,
                     message: 'User ID params not found!'
                 });
-                return;
             }
 
             const promise = await userService.getById(req, res)
@@ -38,19 +36,17 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise);
-                return;
+                return res.status(500).json(promise);
             }
-            res.status(200).json(promise);
+            return res.status(200).json(promise);
         },
         create: async (req, res) => {
             const newUser = new User(req.body);
             if (newUser.name === '' || newUser.role === '') {
-                res.status(400).json({
+                return res.status(400).json({
                     status: false,
                     message: 'fields are empty!'
                 });
-                return;
             }
 
             const promise = await userService.create(newUser, res)
@@ -62,18 +58,16 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise);
-                return;
+                return res.status(500).json(promise);
             }
-            res.status(200).json(promise);
+            return res.status(200).json(promise);
         },
         update: async (req, res) => {
             if (!req.params || !req.params.userId) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: false,
                     message: 'User ID params not found!'
                 });
-                return;
             }
             const promise = await userService.update(new User(req.body), req.params.userId, res)
             .then(res => {
@@ -84,18 +78,17 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise);
-                return;
+                return res.status(500).json(promise);
             }
-            res.status(200).json(promise);
+            
+            return res.status(200).json(promise);
         },
         remove: async (req, res) => {
             if (!req.params || !req.params.userId) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: false,
                     message: 'User ID params not found!'
                 });
-                return;
             }
             const promise = await userService.remove(req.params.userId, res)
             .then(res => {
@@ -106,10 +99,9 @@ const userService = require('../services/user'),
             });
 
             if (!promise.status) {
-                res.status(500).json(promise);
-                return;
+                return res.status(500).json(promise);
             }
-            res.status(200).json(promise);
+            return res.status(200).json(promise);
         },
     };
 
