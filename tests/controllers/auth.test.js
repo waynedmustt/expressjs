@@ -6,7 +6,7 @@ afterEach(() => {
     jest.resetAllMocks();
 });
 
-describe('userController', () => {
+describe('authController', () => {
     it('login : should show error message when returned data is empty', async () => {
         const result = {
             status: true,
@@ -51,6 +51,43 @@ describe('userController', () => {
             status: false,
             message: 'fields are not available!'
         });
+    });
+
+    it('login : should successfully return data', async () => {
+        const result = {
+            status: true,
+            message: [
+                {
+                    name: 'admin',
+                    role: 'admin'
+                }
+            ]
+        };
+        const spy = jest.spyOn(authService, 'login').mockResolvedValue(result);
+
+        const req = {
+            body: {
+                name: 'admin'
+            },
+            app: {
+                set: jest.fn()
+            }
+        };
+        const res = {
+          json: jest.fn((result) => {return result}),
+          status: jest.fn(() => res)
+        };
+        
+        const login = await authController.login(req, res);
+        const comparison = {
+            status: true,
+            message: {
+                name: 'admin',
+                role: 'admin'
+            }
+        }
+        expect(spy).toHaveBeenCalled();
+        expect(login).toEqual(comparison);
     });
 
     it('logout : should successfully show data', async () => {
